@@ -282,12 +282,18 @@ impl Coveralls {
         let repairs = self.repairs.lock().unwrap();
         repairs.clone()
     }
+
+    fn set_delegate(&self, _delegate: Box<dyn CoverallsDelegate>) {}
 }
 
 impl Drop for Coveralls {
     fn drop(&mut self) {
         *NUM_ALIVE.write().unwrap() -= 1;
     }
+}
+
+pub trait CoverallsDelegate {
+    fn do_something(&self);
 }
 
 #[derive(Debug, Clone)]

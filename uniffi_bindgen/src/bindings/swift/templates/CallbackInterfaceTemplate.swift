@@ -110,6 +110,7 @@ fileprivate struct {{ ffi_converter_name }} {
     }
     private static func ensureCallbackinitialized() {
         if !callbackInitialized {
+            print("INIT CALLBACK")
             initCallback()
             callbackInitialized = true
         }
